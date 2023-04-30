@@ -13,12 +13,12 @@ struct Args {
 }
 
 /// Returns array with file and directory count within provided
-/// parent directory with structure [FILE_COUNT, DIR_COUNT]
+/// parent directory with structure [`FILE_COUNT`, `DIR_COUNT`]
 fn count_contents(parent_directory: &str) -> [usize; 2] {
     let mut dir_acc: usize = 0;
     let mut file_acc: usize = 0;
 
-    for item in WalkDir::new(parent_directory).min_depth(1).into_iter() {
+    for item in WalkDir::new(parent_directory).min_depth(1) {
         match item {
             Ok(entry) => {
                 let path = entry.into_path();
@@ -46,5 +46,5 @@ fn main() {
 
     let [file_acc, dir_acc] = count_contents(parent_directory);
     let total_acc = file_acc + dir_acc;
-    println!("{} items / {} files / {} dirs", total_acc, file_acc, dir_acc);
+    println!("{total_acc} items / {file_acc} files / {dir_acc} dirs");
 }

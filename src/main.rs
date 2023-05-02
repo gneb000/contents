@@ -1,11 +1,12 @@
 use std::path::Path;
+use std::process::exit;
 use walkdir::WalkDir;
 
 use clap::Parser;
 
 /// contents: summarize directory contents (total items / file count / directory count)
 #[derive(Parser)]
-#[command(author, version, about, long_about = None)]
+#[command(version, about, long_about = None)]
 struct Args {
     /// parent directory path
     #[arg(value_name = "DIR_PATH")]
@@ -41,7 +42,7 @@ fn main() {
     let dir_path = Path::new(parent_directory);
     if !(dir_path.exists() && dir_path.is_dir()) {
         println!("contents: error: directory not found");
-        return;
+        exit(1);
     }
 
     let [file_acc, dir_acc] = count_contents(parent_directory);

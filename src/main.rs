@@ -41,7 +41,7 @@ fn main() {
 
     let dir_path = Path::new(parent_directory);
     if !(dir_path.exists() && dir_path.is_dir()) {
-        println!("contents: error: directory not found");
+        eprintln!("contents: error: directory not found");
         exit(1);
     }
 
